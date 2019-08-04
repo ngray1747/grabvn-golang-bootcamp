@@ -1,0 +1,48 @@
+// File overview missing
+
+syntax = "proto3";
+
+package feedback;
+
+// import "google/protobuf/timestamp.proto";
+
+service Feedback {
+
+    rpc AddPassengerFeedback (AddFeedbackReq) returns (AddFeedbackRes);
+
+    rpc GetFeedback (GetFeedbackReq) returns (stream GetFeedbackRes);
+
+    rpc RemoveFeedback (RemoveFeedbackReq) returns (RemoveFeedbackRes);
+
+}
+
+message PassengerFeedback {
+    string bookingCode = 1;
+    int32 passengerID = 2;
+    string feedback = 3;
+}
+
+message GetFeedbackReq {
+    int32 passengerID = 1;
+    string bookingCode = 2;
+}
+message GetFeedbackRes {
+    PassengerFeedback psg_feedback = 1;
+}
+
+message AddFeedbackReq {
+    PassengerFeedback psg_feedback = 1;
+}
+
+message AddFeedbackRes {
+    int32 status = 1;
+    string message = 2;
+}
+
+message RemoveFeedbackReq {
+    int32 passengerID = 1;
+}
+
+message RemoveFeedbackRes {
+    AddFeedbackRes delete_feedback = 1;
+}
