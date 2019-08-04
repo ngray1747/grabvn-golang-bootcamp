@@ -1,0 +1,80 @@
+// File overview missing
+// Explain messages
+syntax = "proto3";
+
+package user;
+
+service UserService {
+
+    // Create the requested user
+    rpc CreateUser (CreateUserReq) returns (CreateUserRes);
+
+    // Get the required user detail by email
+    rpc ReadUser (ReadUserReq) returns (ReadUserRes);
+
+    // This service update User's hobby and age if they are not empty by User's email
+    rpc UpdateUser (UpdateUserReq) returns (UpdateUserRes);
+
+    // Delete the requested User by email
+    rpc DeleteUser (DeleteUserReq) returns (DeleteUserRes);
+
+    // Get all the saved User
+    rpc ListUsers (ListUsersReq) returns (ListUsersRes);
+
+}
+
+message User {
+    string email = 1; // This field is required and immutable
+    string hobby = 2;
+    int32 age = 3;
+    string createdAt  = 4;
+}
+
+message CreateUserReq {
+    User user = 1;
+    string api = 2;
+}
+
+message CreateUserRes {
+    string result = 1;
+    string api = 2;
+}
+
+message ReadUserReq {
+    string api = 1;
+    string email = 2;
+} 
+
+message ReadUserRes {
+    string api = 1;
+    User user = 2;
+}
+
+message UpdateUserReq {
+    string api = 1;
+    User user = 2;
+}
+
+message UpdateUserRes {
+    string api = 1;
+    int32 status = 2;
+}
+
+message DeleteUserReq {
+    string api = 1;
+    string email = 2;
+}
+
+message DeleteUserRes {
+    string api = 1;
+    int32 status = 2;
+}
+
+message ListUsersReq {
+    string api = 1;
+}
+
+message ListUsersRes {
+    string api = 1;
+    repeated User users = 2;
+}
