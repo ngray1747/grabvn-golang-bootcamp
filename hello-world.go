@@ -76,7 +76,7 @@ func allocate(listDir []string) {
 		job := Job{index, textString}
 		jobs <- job
 	}
-
+	fmt.Println("Test")
 	close(jobs)
 }
 
